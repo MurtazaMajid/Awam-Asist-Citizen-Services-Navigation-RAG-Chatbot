@@ -1,0 +1,109 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: chat
+    description: Chat operations for Awam Assist
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /chat:
+    post:
+      operationId: sendChatMessage
+      tags: [chat]
+      summary: Send a chat message and get a reply
+      description: Sends the user's chat history (with the latest user message) and a category filter, returns the assistant's reply.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatRequest"
+      responses:
+        "200":
+          description: Assistant reply
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatResponse"
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    ChatRole:
+      type: string
+      enum: [user, assistant]
+    ChatMessage:
+      type: object
+      properties:
+        role:
+          $ref: "#/components/schemas/ChatRole"
+        content:
+          type: string
+      required:
+        - role
+        - content
+    ChatCategory:
+      type: string
+      enum: [all, zakat, iesco, transport, marriage, emergency]
+      description: Optional category filter to focus the assistant's answer
+    ChatRequest:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: "#/components/schemas/ChatMessage"
+          description: Full conversation history including the latest user message
+        category:
+          $ref: "#/components/schemas/ChatCategory"
+      required:
+        - messages
+    ChatSuggestion:
+      type: object
+      properties:
+        label:
+          type: string
+        prompt:
+          type: string
+      required:
+        - label
+        - prompt
+    ChatResponse:
+      type: object
+      properties:
+        reply:
+          type: string
+          description: Assistant's reply text
+        suggestions:
+          type: array
+          items:
+            $ref: "#/components/schemas/ChatSuggestion"
+          description: Optional follow-up suggestions
+      required:
+        - reply
+        - suggestions
