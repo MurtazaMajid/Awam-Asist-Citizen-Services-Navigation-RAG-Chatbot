@@ -30,7 +30,7 @@ vectordb = Chroma(
 )
 
 llm = ChatGroq(
-    groq_api_key="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",
+    groq_api_key=os.environ.get("GROQ_API_KEY"),
     model_name="llama-3.3-70b-versatile"
 )
 
