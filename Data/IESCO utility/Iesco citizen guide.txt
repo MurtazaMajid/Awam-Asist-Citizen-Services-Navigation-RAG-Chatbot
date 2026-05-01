@@ -1,0 +1,134 @@
+IESCO Electricity Services - Citizen Guide
+==========================================
+
+NEW ELECTRICITY CONNECTION
+---------------------------
+How to apply:
+- Visit your nearest IESCO sub-division office in person
+- You can also apply by telephone, mail, or online via IESCO website
+- A one-window operation facility is available at each sub-division
+
+Documents required for new connection:
+- Ownership proof of premises (property documents)
+- Attested copy of CNIC of applicant
+- Approved map or site plan (can be relaxed in rural areas)
+- Wiring test report from a Pakistan Engineering Council registered electrical engineer
+
+Process after application:
+1. Submit application with documents
+2. IESCO conducts site survey
+3. Demand notice issued for connection charges and security deposit
+4. Pay charges at designated bank branch
+5. Connection installed within stipulated time
+
+Connection timeline:
+- Small connections (up to 15 kW): approximately 15-20 days
+- Medium connections (15-70 kW): approximately 25-30 days
+- Large connections (above 70 kW): approximately 30-45 days
+
+CONNECTION CHARGES (LUMP SUM) FOR RESIDENTIAL & COMMERCIAL (Tariff A1 and A2)
+-------------------------------------------------------------------------------
+Single Phase Meter:
+- Service line up to 20 meters: Rs. 8,500
+- Service line 20 to 30 meters: Rs. 10,500
+- Service line 30 to 40 meters: Rs. 11,500
+- Service line 40 to 100 meters: Rs. 11,000 + Rs. 800 per meter above 40 meters
+- Service line 100 to 160 meters: Rs. 60,000 + Rs. 1,000 per meter above 100 meters
+
+Three Phase Meter:
+- Service line up to 20 meters: Rs. 36,500
+- Service line up to 30 meters: Rs. 43,000
+- Service line up to 40 meters: Rs. 50,000
+- Service line above 40 meters: Actual cost as per IESCO store rates
+
+SECURITY DEPOSIT RATES
+----------------------
+Residential (A-1):
+- Urban: Rs. 1,220 per kW
+- Rural: Rs. 610 per kW
+
+Commercial (A-2):
+- Urban: Rs. 1,810 per kW
+- Rural: Rs. 920 per kW
+
+Industrial:
+- B1: Rs. 1,580 per kW
+- B2: Rs. 2,010 per kW
+- B3: Rs. 2,890 per kW
+- B4: Rs. 3,560 per kW
+
+ELECTRICITY BILLING
+-------------------
+- Meter reading is taken every month by IESCO staff
+- Bill is delivered to your premises within one day of generation
+- Bill is also available on IESCO website for download and payment
+- Payment can be made at any commercial bank branch or post office
+
+What your bill contains:
+- Consumer name and reference number
+- Billing period and units consumed
+- Total cost of electricity as per applicable tariff
+- GST (General Sales Tax)
+- Amount payable within due date
+- Billing history for last 12 months
+
+DISCONNECTION
+-------------
+Your connection can be disconnected if:
+- You have not paid your electricity bill
+- You are involved in electricity theft
+- You illegally reconnected after disconnection
+- Your load exceeds sanctioned load
+- You request disconnection yourself
+
+Reconnection:
+- Pay all outstanding dues to get reconnected
+- If disconnected for more than 365 days, IESCO may remove the meter
+- If disconnected for more than 3 years, you must apply for a new connection
+
+CONSUMER COMPLAINTS
+-------------------
+Types of complaints you can file:
+- New connection issues
+- Wrong meter reading or billing errors
+- Electricity supply failures
+- Low voltage or fluctuations
+- Detection bills disputes
+
+How to file a complaint:
+- Visit nearest IESCO Consumer Services Center
+- Use IESCO online complaint management system
+- Contact One Window Operations facility at your sub-division
+
+Complaint resolution timeframes:
+- Billing complaints: resolved within 15 days
+- Technical complaints (low voltage, fluctuations): attended within 24-48 hours
+- Electricity leakage complaints: attended immediately
+
+CHANGE OF NAME
+--------------
+Documents required:
+- Ownership proof / sale deed
+- Copy of last paid bill (no arrears should be pending)
+- Attested copy of CNIC of applicant
+- Power Supply Contract
+
+THEFT OF ELECTRICITY
+--------------------
+- Electricity theft is a criminal offense
+- IESCO can file an FIR against anyone found stealing electricity
+- Detection bills can be issued for up to 6 months of estimated theft
+
+ELIGIBILITY FOR NEW CONNECTION
+------------------------------
+You are eligible for a new electricity connection if:
+- You submit a proper application with required documents
+- Your wiring is tested and certified by a PEC registered electrical engineer
+- You pay the required security deposit
+- No electricity bill arrears are outstanding at the premises
+- You have not been convicted of electricity theft
+
+USEFUL CONTACTS
+---------------
+IESCO Website: iesco.com.pk
+IESCO Helpline: 118 (for complaints and emergencies)

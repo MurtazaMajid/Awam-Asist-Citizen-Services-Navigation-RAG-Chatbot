@@ -1,0 +1,209 @@
+NADRA Services - Complete Citizen Guide
+========================================
+
+WHAT IS NADRA?
+---------------
+NADRA (National Database & Registration Authority) is Pakistan's premier government agency responsible for maintaining the national database, issuing identity cards, and providing secure registration services to all citizens.
+
+NADRA Helpline: 051-111-786-100
+NADRA Online Portal: id.nadra.gov.pk
+Pak ID App: Available on Android and iOS
+
+========================================
+SERVICE TIERS - NORMAL, URGENT, EXECUTIVE
+========================================
+NADRA offers three processing speeds for most services:
+
+Normal: Lowest cost, longest processing time (around 31 days)
+Urgent: Higher cost, faster processing (around 12-23 days)
+Executive: Highest cost, fastest processing (around 9 days)
+
+========================================
+CNIC (COMPUTERIZED NATIONAL IDENTITY CARD)
+========================================
+The CNIC is the primary identity document for all Pakistani citizens aged 18 and above.
+
+Validity: 10 years
+Required for: Voting, banking, SIM registration, government services, travel, property, etc.
+
+CNIC FEES (2025):
+New CNIC:
+- Normal: Free (31 days)
+- Urgent: Rs. 1,150 (12 days)
+- Executive: Rs. 2,150 (9 days)
+
+Renewal/Modification/Duplicate:
+- Normal: Rs. 400 (31 days)
+- Urgent: Rs. 1,150 (12 days)
+- Executive: Rs. 2,150 (9 days)
+
+Smart CNIC (SNIC) - latest generation with chip:
+- Normal: Rs. 750 (31 days)
+- Urgent: Rs. 1,500 (15 days)
+- Executive: Rs. 2,500 (9 days)
+
+DOCUMENTS REQUIRED FOR NEW CNIC:
+- Original Birth Certificate or B-Form
+- CNIC copy of father/mother or guardian
+- Proof of residence (utility bill or rental agreement)
+- For married women: Marriage certificate
+
+ELIGIBILITY:
+- Pakistani citizen aged 18 or above
+- Children under 18 must apply for B-Form
+- Overseas Pakistanis apply for NICOP
+
+HOW TO APPLY FOR CNIC:
+Option 1 - Online:
+1. Visit id.nadra.gov.pk or use Pak ID App
+2. Fill in your details
+3. Pay fee online
+4. Visit nearest NADRA Registration Center (NRC) for biometrics
+
+Option 2 - In Person:
+1. Visit nearest NADRA Registration Center
+2. Bring required documents
+3. Fill application form
+4. Get photo and fingerprints taken
+5. Pay fee at counter
+6. Collect CNIC after processing time
+
+LOST CNIC:
+- File a police report for lost CNIC
+- Bring police report to NADRA center
+- Apply for duplicate CNIC
+- Fee: Same as renewal
+
+CNIC VERIFICATION:
+- Visit NADRA CNIC Verification Portal online
+- Enter your CNIC number to check details and status
+- Track your application via SMS to 8400
+
+========================================
+NICOP (NATIONAL IDENTITY CARD FOR OVERSEAS PAKISTANIS)
+========================================
+For Pakistani citizens living abroad. Allows dual nationality holders to travel to Pakistan without a visa.
+
+Validity: 10 years
+
+Documents required:
+- Pakistani passport (valid or expired)
+- Previous CNIC or NICOP
+- Parents CNIC/NICOP
+- Siblings CNIC/NICOP
+- Spouse CNIC (if married)
+- Marriage/Divorce certificate (if applicable)
+- Union Council birth certificate or B-Form
+
+========================================
+B-FORM / CHILD REGISTRATION CERTIFICATE (CRC)
+========================================
+First identity document for children under 18. Links child to parents in national database.
+
+Validity: Expires when child turns 18 (then must apply for CNIC)
+
+FEES:
+- Standard: Rs. 50 (5-10 working days)
+- Executive: Rs. 500
+
+Documents required:
+- Union Council birth certificate
+- CNIC of both parents
+
+How to apply:
+- Children under 1 year: Apply via Pak ID App or online at id.nadra.gov.pk
+- Children over 1 year: Visit NADRA Registration Center in person
+- Child must be present
+- Fingerprints required for children aged 10 and above
+
+========================================
+FAMILY REGISTRATION CERTIFICATE (FRC)
+========================================
+Documents all family members linked in NADRA database. Required for legal matters, property, inheritance, visa applications.
+
+How to apply:
+- Apply online at id.nadra.gov.pk
+- Receive FRC as PDF via email within 1-2 working days
+
+========================================
+PASSPORT
+========================================
+Issued by Directorate General of Immigration and Passports (DGIP), not NADRA. However CNIC/NICOP is required to apply.
+
+Online portal: onlinemrp.dgip.gov.pk
+Fee payment: Passport Fee Asaan App or e-Payment Web Portal
+
+Types:
+- Ordinary Machine Readable Passport (MRP)
+- e-Passport (available from all field offices since August 2023)
+
+Documents required:
+- Original valid CNIC/NICOP with photocopy
+- Previous passport with photocopy (if issued)
+- Bank fee receipt or e-payment confirmation
+- For government employees: NOC from department
+- For minors aged 10+: Updated B-Form with fingerprints and photo
+
+Important notes:
+- You can apply from any passport office regardless of your address on CNIC
+- Online passport renewal is available for both inland and overseas Pakistanis
+- Lost passport: Double fee charged for first loss, quadruple for second loss
+- Must file police report for lost passport
+
+PASSPORT OFFICES:
+- Available in all major cities across Pakistan
+- Some offices open 24/7 including weekends
+- Check dgip.gov.pk for nearest office
+
+========================================
+POC (PAKISTAN ORIGIN CARD)
+========================================
+For foreign nationals with Pakistani roots or foreign spouses of Pakistani citizens.
+
+Eligibility:
+- You were a Pakistani national but surrendered nationality
+- Foreign national whose parents or grandparents were Pakistani
+- Foreign national with close Pakistani relative (brother, sister, uncle, aunt)
+- Foreign national married to a Pakistani citizen
+
+Validity:
+- Spouse-based POC: 5 years
+- Ex-Pakistani POC: 7 years
+
+========================================
+HOW TO CHECK YOUR CNIC STATUS ONLINE
+========================================
+1. Visit NADRA's official website: nadra.gov.pk
+2. Go to CNIC Verification Portal
+3. Enter your 13-digit CNIC number
+4. View your registration status and details
+
+Track application by SMS:
+- Send your tracking ID to 8400
+- Receive status updates via SMS
+
+========================================
+PAYMENT METHODS
+========================================
+At NADRA Centers: Cash accepted
+Online applications: Credit/debit card or e-payment franchise (Sahulat)
+Passport fee: Via Passport Fee Asaan App or Web Portal
+
+========================================
+IMPORTANT NOTES
+========================================
+- New CNIC is FREE under normal processing
+- Keep your receipt until you receive your card
+- Executive service available at Mega Centers and specific NRCs
+- If any information is wrong on your card, ask the issuing office to correct it immediately
+- To modify name, father name, or date of birth on passport: First modify CNIC/NICOP, then apply for new passport
+
+========================================
+NADRA REGISTRATION CENTERS
+========================================
+NADRA has Registration Centers (NRCs) in all major cities and districts across Pakistan. Find your nearest center at nadra.gov.pk or call the helpline.
+
+NADRA Helpline: 051-111-786-100
+NADRA Website: nadra.gov.pk
+Online Services: id.nadra.gov.pk
+Pak ID App: Available on Android and iOS

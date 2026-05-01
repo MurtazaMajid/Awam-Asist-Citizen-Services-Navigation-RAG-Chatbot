@@ -1,0 +1,145 @@
+BISP AND EHSAAS PROGRAMS - CITIZEN GUIDE
+Pakistan Social Safety Net Services
+
+===========================================
+WHAT IS BISP?
+===========================================
+
+The Benazir Income Support Programme (BISP) is Pakistan's largest federal cash transfer program for low-income families. It provides financial assistance to poor and deserving households across all provinces.
+
+The program is managed through the 8171 helpline and web portal.
+Official Website: bisp.gov.pk
+SMS Helpline: Send CNIC number to 8171
+Phone Helpline: 0800-26477 (toll free)
+
+===========================================
+BENAZIR KAFAALAT PROGRAM
+===========================================
+
+What is it?
+Monthly financial support for low-income women. It is the main cash transfer program under BISP.
+
+Payment Amount (2026):
+- Regular beneficiaries: Rs. 14,500 per quarter (every 3 months)
+- Payments are distributed via banks, ATMs, and BISP Tehsil Offices
+- HBL Konnect and Bank Alfalah outlets are also used
+
+Who is eligible?
+- Women who are Pakistani nationals with a valid CNIC
+- Household monthly income below the poverty line threshold (PMT score below 32)
+- Not a government employee (federal or provincial)
+- Spouse is not a government employee
+- Does not own more than 3 acres of farmland or more than 80 square yards of residential land
+- Not already enrolled in another government support program
+- Family registered in the NSER (National Socio-Economic Registry) survey database
+
+Who is NOT eligible?
+- Government employees or their spouses
+- People receiving a pension from the government
+- Families owning large amounts of land or property
+- People who have traveled abroad recently (executive travel)
+- Families whose members applied for CNIC through executive fee option (3 or more members)
+
+How to check eligibility:
+Method 1 - SMS: Send your 13-digit CNIC number to 8171. You will receive a reply in Urdu or English showing your eligibility status.
+Method 2 - Online: Visit 8171.bisp.gov.pk, enter your CNIC number, fill in the captcha, and click Submit.
+Method 3 - Visit: Go to your nearest BISP Tehsil Office with your original CNIC.
+
+How to register:
+1. Visit your nearest BISP office or NSER Survey Center
+2. Bring your original CNIC
+3. Provide family details and income information
+4. Complete biometric verification
+5. After verification, you will receive confirmation of eligibility
+6. Track your registration online through the 8171 portal
+
+PMT Score:
+BISP uses a Poverty Means Test (PMT) score to determine eligibility. The lower your PMT score, the poorer you are considered. Currently the threshold is PMT score below 32 to be eligible.
+
+How to collect payment:
+- Visit any HBL ATM with your Smart Card
+- Visit authorized BISP retailers or Citizen Shops
+- Visit BISP Tehsil Office with your original CNIC and complete biometric verification
+- New beneficiaries must first visit a BISP-authorized retailer for initial verification
+
+Important: BISP registration is valid for 3 years. After 3 years, you must complete the dynamic survey again to remain eligible.
+
+===========================================
+BENAZIR TALEEMI WAZAIF (EDUCATION STIPENDS)
+===========================================
+
+What is it?
+Education stipends for children of BISP Kafaalat beneficiaries. It encourages school enrollment and attendance.
+
+Who is eligible?
+Children of registered BISP Kafaalat beneficiaries who are enrolled in school.
+
+Stipend Amounts (2026):
+- Primary level: Rs. 2,500 per quarter
+- Secondary/Higher level: Rs. 4,500 per quarter
+- Payments started from April 6, 2026
+
+Important: If the mother's Kafaalat status becomes inactive, the child's stipend is also stopped. Keep the mother's registration active.
+
+===========================================
+BENAZIR NASHONUMA PROGRAMME
+===========================================
+
+What is it?
+Conditional cash transfer for pregnant women and mothers with children under 2 years old. Focuses on nutrition and health.
+
+Target: Reduce stunting in children under 2 years.
+
+===========================================
+HOW TO UPDATE YOUR INFORMATION
+===========================================
+
+If your status shows registered but you are not receiving payments:
+1. Visit your nearest BISP office
+2. Complete the dynamic survey update
+3. Provide updated CNIC and family details
+4. Wait for re-verification (can take a few weeks)
+
+If you were removed from the program:
+Beneficiaries who did not update their information after 3 years may be removed. Visit BISP office and complete the dynamic survey to be re-enrolled.
+
+===========================================
+FRAUD PREVENTION - IMPORTANT WARNINGS
+===========================================
+
+BISP services are 100% FREE. Never pay anyone claiming to help with registration or payment.
+
+Do not:
+- Pay any middleman for BISP registration
+- Share your Smart Card PIN with anyone
+- Trust anyone claiming to guarantee BISP enrollment for a fee
+- Use unofficial websites or apps for BISP checks
+
+Only use:
+- Official SMS to 8171
+- Official website: 8171.bisp.gov.pk or bisp.gov.pk
+- Official BISP offices
+- Authorized HBL ATMs and partner banks
+
+If you suspect fraud, report immediately to BISP helpline: 0800-26477
+
+===========================================
+PAKISTAN CITIZEN PORTAL
+===========================================
+
+For general government service complaints including BISP related issues:
+- Download Pakistan Citizen Portal app
+- Website: complaints.pakistan.gov.pk
+- This connects to all government departments
+
+===========================================
+BISP OFFICE CONTACTS
+===========================================
+
+National Helpline: 0800-26477 (toll free, Monday to Friday)
+SMS Service: 8171
+Web Portal: 8171.bisp.gov.pk
+Official Website: bisp.gov.pk
+
+To find your nearest BISP Tehsil Office:
+Visit bisp.gov.pk or call 0800-26477 and ask for the nearest office location in your district.
