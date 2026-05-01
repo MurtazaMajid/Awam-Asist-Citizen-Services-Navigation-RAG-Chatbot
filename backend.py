@@ -1,4 +1,4 @@
-
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -21,11 +21,10 @@ app.add_middleware(
 class Question(BaseModel):
     question: str
 
-# Load everything once on startup
 embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
 vectordb = Chroma(
-    persist_directory="./chroma_db",
+    persist_directory="./",
     embedding_function=embeddings
 )
 
