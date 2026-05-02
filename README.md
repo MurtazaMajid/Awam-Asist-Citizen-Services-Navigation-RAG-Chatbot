@@ -1,32 +1,30 @@
 ---
-<div align="center">
- <h1>Awam Assist</h1>
 
-     
- 
+<div align="center">
+
 <img src="frontend/logo" width="200"/>
 
- 
+<h1>Awam Assist</h1>
 
-  <p><strong>An AI-powered citizen service navigator for Pakistan.<br/>Plain answers. Real sources. English and Roman Urdu.</strong></p>
+<p><strong>An AI-powered citizen service navigator for Pakistan.<br/>Plain answers. Real sources. English and Roman Urdu.</strong></p>
 
-  <p>
-    <a href="https://awamassist.vercel.app">
-      <img src="https://img.shields.io/badge/Frontend-Live-brightgreen?style=flat-square" alt="Frontend"/>
-    </a>
-    <a href="https://awam-assist-production.up.railway.app">
-      <img src="https://img.shields.io/badge/API-Live-brightgreen?style=flat-square" alt="API"/>
-    </a>
-    <img src="https://img.shields.io/badge/Python-3.10-blue?style=flat-square&logo=python" alt="Python"/>
-    <img src="https://img.shields.io/badge/LangChain-LCEL-3c7dbc?style=flat-square" alt="LangChain"/>
-    <img src="https://img.shields.io/badge/LLM-LLaMA%203.3%2070B-orange?style=flat-square" alt="LLM"/>
-    <img src="https://img.shields.io/badge/Vector%20DB-ChromaDB-red?style=flat-square" alt="ChromaDB"/>
-    <img src="https://img.shields.io/badge/Deployed%20on-Railway-blueviolet?style=flat-square" alt="Railway"/>
-  </p>
+<p>
+  <a href="https://awamassist.vercel.app">
+    <img src="https://img.shields.io/badge/Frontend-Live-brightgreen?style=flat-square" alt="Frontend"/>
+  </a>
+  <a href="https://awam-assist-production.up.railway.app">
+    <img src="https://img.shields.io/badge/API-Live-brightgreen?style=flat-square" alt="API"/>
+  </a>
+  <img src="https://img.shields.io/badge/Python-3.10-blue?style=flat-square&logo=python" alt="Python"/>
+  <img src="https://img.shields.io/badge/LangChain-LCEL-3c7dbc?style=flat-square" alt="LangChain"/>
+  <img src="https://img.shields.io/badge/LLM-LLaMA%203.3%2070B-orange?style=flat-square" alt="LLM"/>
+  <img src="https://img.shields.io/badge/Vector%20DB-ChromaDB-red?style=flat-square" alt="ChromaDB"/>
+  <img src="https://img.shields.io/badge/Deployed%20on-Railway-blueviolet?style=flat-square" alt="Railway"/>
+</p>
+
 </div>
 
 ---
-
 
 ## Table of Contents
 
@@ -73,7 +71,7 @@ Awam Assist is a RAG-based chatbot that acts as a single entry point for Pakista
 
 It does not generate answers from the LLM's training data. It retrieves the most relevant chunks from a curated knowledge base of official Pakistani government sources, passes them to the LLM as context, and instructs the model to answer only from that context. This means the answers are grounded, verifiable, and traceable back to a real source.
 
-The chatbot currently covers eight categories of government services and is deployed as a live REST API that any frontend or mobile application can connect to.
+The chatbot currently covers 15 categories of government services and is deployed as a live REST API that any frontend or mobile application can connect to.
 
 ---
 
@@ -95,10 +93,10 @@ When a user submits a question, the following sequence runs in under two seconds
 The user's question is converted into a 384-dimensional embedding vector using the `all-MiniLM-L6-v2` sentence transformer model running locally on the server.
 
 **Step 2 — Semantic Retrieval**
-The query vector is compared against all stored document chunk vectors in ChromaDB using cosine similarity. The top three most semantically relevant chunks are retrieved. These chunks come from actual government documents, not from the LLM's weights.
+The query vector is compared against all stored document chunk vectors in ChromaDB using cosine similarity. The top 5 most semantically relevant chunks are retrieved. These chunks come from actual government documents, not from the LLM's weights.
 
 **Step 3 — Prompt Assembly**
-The three retrieved chunks are injected into a structured prompt alongside the original question. The prompt instructs the model to answer only from the provided context, to use plain language, and to respond in the same language the user wrote in.
+The 5 retrieved chunks are injected into a structured prompt alongside the original question. The prompt instructs the model to answer only from the provided context, to use plain language, and to respond in the same language the user wrote in.
 
 **Step 4 — Answer Generation**
 The assembled prompt is sent to Groq's inference API, which runs LLaMA 3.3 70B at extremely low latency. The model generates an answer grounded in the retrieved context.
@@ -120,12 +118,13 @@ Raw Source Documents
   Document Loading
   TextLoader for .txt files
   PyPDFLoader for .pdf files
+  os.walk — loads all subfolders recursively
           |
           v
   Text Splitting
   RecursiveCharacterTextSplitter
-  chunk_size = 500 characters
-  chunk_overlap = 50 characters
+  chunk_size  = 1000 characters
+  chunk_overlap = 100 characters
           |
           v
   Embedding Generation
@@ -136,7 +135,7 @@ Raw Source Documents
           v
   Vector Storage
   ChromaDB persistent store
-  Saved to /chroma_db on disk
+  Saved to /content/chroma_db on disk
           |
           v
   Deployment
@@ -146,21 +145,25 @@ Raw Source Documents
           v
   Query Time
   User question -> embedding -> cosine similarity search
-  Top 3 chunks retrieved -> injected into prompt
+  Top 5 chunks retrieved -> injected into prompt
   Groq LLaMA 3.3 70B generates grounded answer
 ```
 
-**Why chunk_size = 500?**
+**Why chunk_size = 1000?**
 
-Smaller chunks improve retrieval precision because each chunk covers a narrower topic. Larger chunks give the LLM more context per retrieved piece. 500 characters is roughly one paragraph, which is a natural unit of information for government FAQs and policy documents. The 50-character overlap prevents information from being cut off at chunk boundaries.
+Smaller chunks improve retrieval precision but risk splitting a section header from the content that follows it. At 500 characters, section headers and their document lists were ending up in different chunks, causing retrieval failures for structured government documents. 1000 characters keeps a header and its associated content together in a single chunk, which significantly improved accuracy across all 15 categories.
+
+**Why chunk_overlap = 100?**
+
+The 100-character overlap prevents information from being cut off at chunk boundaries. For government documents where a sentence may span a chunk boundary, this overlap ensures continuity.
 
 **Why all-MiniLM-L6-v2?**
 
 It is an 80MB model that runs fast on CPU, produces high-quality 384-dimensional embeddings for English text, and requires no API key or internet connection at inference time. For a project of this scope it is the right tradeoff between quality and operational cost.
 
-**Why k=3?**
+**Why k=5?**
 
-Three chunks provide enough context for the LLM to construct a complete answer without exceeding the prompt budget or introducing irrelevant noise from lower-ranked results.
+Government documents use structured section headers that consume part of the chunk without directly answering a question. At k=3, the most relevant answer chunk was often ranked 4th or 5th and not included in the context. Increasing k to 5 ensures the LLM receives enough context to find the answer even when it is not in the top 3 retrieved results.
 
 ---
 
@@ -170,18 +173,26 @@ All documents in the knowledge base were sourced from official Pakistani governm
 
 | Category | Source | Coverage |
 |----------|--------|----------|
-| Zakat Punjab | zakat.punjab.gov.pk | Guzara Allowance, Guzara for Blind, Leprosy patients, Education Stipends (General, Technical, Deeni Madaris), Health Care, Marriage Assistance, Taleef-e-Qalb, Release of Prisoners |
-| IESCO Utilities | iesco.com.pk | New connection process, AMI meter costs, lump sum charges for tariff A1 and A2, eligibility criteria, billing disputes, complaint process, disconnection and reconnection |
-| Punjab Transport | ptc.punjab.gov.pk | T-Cash Card registration and usage, Metro Bus Lahore, Orange Line Metro Train, Speedo Bus, routes, fares, helpline numbers |
-| ICT Civil Registration | ictadministration.gov.pk | Marriage Registration Certificate, Birth Certificate, B-Form for children, Death Certificate, required documents, fees, processing times, office locations |
-| NADRA Services | nadra.gov.pk | CNIC new and renewal, NICOP for overseas Pakistanis, B-Form, Family Registration Certificate, Passport, Person of Pakistani Origin card, fees, processing times, office locations |
-| BISP / Ehsaas | bisp.gov.pk | Benazir Kafaalat eligibility and registration, PMT score explanation, Taleemi Wazaif education stipends, payment amounts, how to check status via 8171 SMS, fraud warnings |
-| Rescue and Emergency | rescue.gov.pk | Rescue 1122 Punjab, Police 15, Edhi Foundation, Chippa, FIA Cybercrime, Women Helpline, what to do in different emergency types, province-wise coverage |
-| Police and FIR | punjabpolice.gov.pk | What an FIR is, who can file one, step-by-step process, what to do if police refuse, legal remedies under Section 22-A CrPC, online FIR systems, bail rights, common scenarios |
+| Zakat Punjab | zakat.punjab.gov.pk | Guzara Allowance, Guzara for Blind, Leprosy patients, Education Stipends, Health Care, Marriage Assistance, Taleef-e-Qalb, Release of Prisoners |
+| IESCO Utilities | iesco.com.pk | New connection process, AMI meter costs, lump sum charges, eligibility, billing disputes, complaint process, disconnection and reconnection |
+| Punjab Transport | ptc.punjab.gov.pk | T-Cash Card registration and usage, Metro Bus Lahore, Orange Line, Speedo Bus, routes, fares, helpline numbers |
+| ICT Civil Registration | ictadministration.gov.pk | Marriage Registration, Birth Certificate, B-Form, Death Certificate, required documents, fees, processing times |
+| NADRA Services | nadra.gov.pk | CNIC new and renewal, NICOP, B-Form, Family Registration Certificate, POC card, fees, processing times, office locations |
+| BISP / Ehsaas | bisp.gov.pk | Benazir Kafaalat eligibility, PMT score explanation, Taleemi Wazaif stipends, payment amounts, SMS check via 8171, fraud warnings |
+| Rescue and Emergency | rescue.gov.pk | Rescue 1122, Police 15, Edhi Foundation, Chippa, FIA Cybercrime, Women Helpline, emergency procedures by type |
+| Police and FIR | punjabpolice.gov.pk | What an FIR is, who can file one, step-by-step process, what to do if police refuse, Section 22-A CrPC, online FIR, bail rights |
+| Education and Scholarships | hec.gov.pk | HEC undergraduate scholarships, eligibility criteria, application process, deadlines, provincial quota |
+| FBR Tax and NTN | fbr.gov.pk | NTN registration, tax filing, filer vs non-filer status, penalties, income tax brackets, IRIS portal guide |
+| Pakistan Citizens Portal | citizensportal.gov.pk | How to file a complaint, track status, escalate, what complaints are accepted, response timelines |
+| Passport | dgip.gov.pk | New passport application, renewal, documents required, fees, urgent passport, collection process, DGIP office locations |
+| Property and Land Records | punjablandsystem.gov.pk | How to check Fard (ownership record), mutation process, online Arazi portal, property transfer documents |
+| Sehat Sahulat Health | sehat.gov.pk | Eligibility criteria, enrolled hospitals, coverage limit, how to use the card, diseases covered, complaint process |
+| WASA and Gas SNGPL | sngpl.com.pk / wasa.punjab.gov.pk | New gas connection application, SNGPL meter installation, WASA water connection, bill dispute process, helpline numbers |
 
-**Total documents:** 8 structured text files
-**Total chunks after splitting:** 142
-**Total vectors in ChromaDB:** 142
+**Total documents:** 15 structured text files
+**Total chunks after splitting:** 139
+**Total vectors in ChromaDB:** 139
+**Retrieval accuracy (batch evaluation):** 15/15 categories
 
 ---
 
@@ -191,13 +202,13 @@ All documents in the knowledge base were sourced from official Pakistani governm
 |-------|-----------|-----|
 | LLM | Groq, LLaMA 3.3 70B Versatile | Fast inference, free tier, high quality open model |
 | Embeddings | HuggingFace all-MiniLM-L6-v2 | Lightweight, no API cost, strong English performance |
-| Vector Store | ChromaDB | Simple to use, persistent, no external service required |
+| Vector Store | ChromaDB | Simple, persistent, no external service required |
 | RAG Orchestration | LangChain LCEL | Clean pipeline composition, well-maintained |
 | Backend API | FastAPI, Uvicorn | High performance Python API framework |
-| Backend Deployment | Railway | Simple Python deployment, $5/month free credit |
+| Backend Deployment | Railway | Simple Python deployment, auto-deploy on push |
 | Frontend | HTML, CSS, JavaScript | Lightweight, fast, no framework overhead |
 | Frontend Deployment | Vercel | Free, always-on static hosting |
-| Development Environment | Google Colab | Free GPU/CPU for ingestion pipeline |
+| Development Environment | Google Colab | Free CPU for ingestion pipeline |
 
 ---
 
@@ -228,7 +239,7 @@ All documents in the knowledge base were sourced from official Pakistani governm
           |                                             |
           |   1. Embed question (all-MiniLM-L6-v2)     |
           |   2. Search ChromaDB (cosine similarity)    |
-          |   3. Retrieve top 3 chunks                  |
+          |   3. Retrieve top 5 chunks                  |
           |   4. Build prompt with context              |
           |   5. Send to Groq API                       |
           |   6. Return answer as JSON                  |
@@ -250,37 +261,40 @@ All documents in the knowledge base were sourced from official Pakistani governm
 Awam-Asist-Citizen-Services-Navigation-RAG-Chatbot/
 |
 |-- backend/
-|   |
-|   |-- main.py                        FastAPI application and RAG chain definition
-|   |-- requirements.txt               Python dependencies
-|   |-- railway.json                   Railway deployment configuration
-|   |
-|   |-- chroma.sqlite3                 ChromaDB SQLite metadata store
-|   |-- data_level0.bin                ChromaDB HNSW index (vector data)
-|   |-- header.bin                     ChromaDB index header
-|   |-- length.bin                     ChromaDB index lengths
-|   └-- link_lists.bin                 ChromaDB HNSW link lists
+|   |-- main.py                          FastAPI application and RAG chain
+|   |-- requirements.txt                 Python dependencies
+|   |-- railway.json                     Railway deployment configuration
+|   |-- chroma.sqlite3                   ChromaDB SQLite metadata store
+|   |-- data_level0.bin                  ChromaDB HNSW vector index
+|   |-- header.bin                       ChromaDB index header
+|   |-- length.bin                       ChromaDB index lengths
+|   └-- link_lists.bin                   ChromaDB HNSW link lists
 |
 |-- frontend/
-|   |
-|   |-- index.html                     Main chat interface
-|   |-- style.css                      Styling
-|   |-- script.js                      API call logic and UI interaction
-|   └-- logo.png                       Awam Assist logo
+|   |-- index.html                       Main chat interface
+|   |-- style.css                        Styling
+|   |-- script.js                        API call logic and UI interaction
+|   └-- logo.png                         Awam Assist logo
 |
-|-- data/                              Knowledge base source documents
-|   |
-|   |-- Zakat_Punjab_Complete_Guide.txt
-|   |-- IESCO_Citizen_Guide.txt
-|   |-- Punjab_Transport_Complete.txt
-|   |-- ICT_Civil_Registration_Services.txt
-|   |-- Nadra_Complete.txt
+|-- data/
+|   |-- Zakat punjab complete.txt
+|   |-- Iesco citizen guide.txt
+|   |-- Punjab transport complete.txt
+|   |-- ICT Civil Registration Services.txt
+|   |-- Nadra complete.txt
 |   |-- BISP_Ehsaas_Complete_Guide.txt
-|   |-- Emergency_Service.txt
-|   └-- Police_FIR_Complete_Guide.txt
+|   |-- Emergency serice.txt
+|   |-- Police_FIR_Complete_Guide.txt
+|   |-- Education_Scholarships_Complete_Guide.txt
+|   |-- FBR_Tax_NTN_Complete_Guide.txt
+|   |-- Pakistan_Citizens_Portal_Complete_Guide.txt
+|   |-- Passport_Complete_Guide.txt
+|   |-- Property_Land_Records_Complete_Guide.txt
+|   |-- Sehat_Sahulat_Complete_Guide.txt
+|   └-- WASA_Gas_SNGPL_Complete_Guide.txt
 |
 |-- notebook/
-|   └-- RAG_Pipeline_Awam_Assist.ipynb  Full pipeline: ingestion, embedding, testing
+|   └-- RAG_Pipeline_Awam_Assist.ipynb   Full pipeline: ingestion, embedding, testing
 |
 └-- README.md
 ```
@@ -371,6 +385,22 @@ Response:
 }
 ```
 
+**Example — Tax query:**
+
+Request:
+```json
+{
+  "question": "How do I register for NTN with FBR?"
+}
+```
+
+Response:
+```json
+{
+  "answer": "To register for NTN (National Tax Number) with FBR, go to the IRIS portal at iris.fbr.gov.pk and click on Registration for Unregistered Person. You will need your CNIC, a valid email address, and a phone number. After submitting, FBR will verify your details and issue your NTN. Salaried individuals can also register through their employer."
+}
+```
+
 ---
 
 ## Running Locally
@@ -441,13 +471,21 @@ Open `notebook/RAG_Pipeline_Awam_Assist.ipynb` in Google Colab and run the follo
 
 | Step | What It Does |
 |------|-------------|
-| Step 3 | Mount Google Drive and locate your data folder |
-| Step 4 | Load all .txt and .pdf files from the knowledge base |
-| Step 5 | Split documents into 500-character chunks with 50-character overlap |
-| Step 6 | Generate embeddings and save to ChromaDB at /content/chroma_db |
-| Step 9 | Run a test query to verify the pipeline works |
-| Step 10 | Run batch evaluation across all 8 categories |
-| Step 12 | Export ChromaDB as a zip file and download it |
+| Step 1 | Install dependencies |
+| Step 2 | Import all libraries |
+| Step 3 | Upload knowledge base zip directly to Colab via file picker |
+| Step 4 | Extract zip and load all .txt and .pdf files recursively |
+| Step 5 | Split documents into 1000-character chunks with 100-character overlap |
+| Step 6 | Delete old ChromaDB (prevents read-only database errors) |
+| Step 7 | Generate embeddings and save to ChromaDB |
+| Step 8 | Initialize the Groq LLM |
+| Step 9 | Build the RAG chain |
+| Step 10 | Run a single test query to verify the pipeline |
+| Step 11 | Run batch evaluation across all 15 categories |
+| Step 12 | Debug retrieval for any failing category |
+| Step 13 | Verify all files are indexed in ChromaDB |
+| Step 14 | Interactive chat widget for manual testing |
+| Step 15 | Export ChromaDB as a zip file and download it |
 
 After downloading, extract the zip and replace the five ChromaDB files in the `backend/` folder:
 
@@ -460,6 +498,8 @@ link_lists.bin
 ```
 
 Push the updated files to GitHub. Railway will detect the push and automatically redeploy the backend with the new knowledge base.
+
+**Important:** Always run Step 6 (delete old ChromaDB) before Step 7 (build ChromaDB). Skipping this step causes a read-only database error because the previous session's ChromaDB is still locked.
 
 ---
 
@@ -510,8 +550,6 @@ link_lists.bin
 5. Add the `GROQ_API_KEY` environment variable under the Variables tab
 6. Railway will build and deploy automatically
 
-Your API will be live at a URL like `https://your-app-name.up.railway.app`.
-
 ### Frontend on Vercel
 
 The frontend is a static site (HTML + CSS + JS) with no build step required.
@@ -533,13 +571,17 @@ Make sure the API base URL in `script.js` points to your Railway backend URL.
 
 Fine-tuning an LLM on government documents would be expensive, slow to update, and would still be prone to hallucination. RAG allows the knowledge base to be updated by simply adding a new text file and re-running the ingestion pipeline. The LLM is only used for reasoning and language generation, not as a knowledge store.
 
+**Why chunk_size = 1000 instead of a smaller value?**
+
+The initial implementation used chunk_size = 500. During evaluation, 3 out of 8 categories failed because structured government documents use section headers followed by detailed content. At 500 characters, the headers and their associated lists were splitting into separate chunks, and retrieval would fetch the header chunk without the answer. Increasing to 1000 characters keeps section headers and their content together, which resolved all retrieval failures.
+
 **Why ChromaDB instead of Pinecone or Weaviate?**
 
-ChromaDB runs locally with no external service dependency and no cost. For a knowledge base of 142 chunks, a fully managed vector database would be significant over-engineering. ChromaDB files are bundled directly with the backend and deployed to Railway as static files.
+ChromaDB runs locally with no external service dependency and no cost. For a knowledge base of 139 chunks, a fully managed vector database would be significant over-engineering. ChromaDB files are bundled directly with the backend and deployed to Railway as static files.
 
 **Why Groq instead of OpenAI?**
 
-Groq's free tier provides fast inference on LLaMA 3.3 70B, which is a high-quality open model comparable to GPT-3.5 on most tasks. For a civic application where operational cost matters, avoiding a paid API dependency on the critical path makes the project more sustainable.
+Groq's free tier provides fast inference on LLaMA 3.3 70B, which is a high-quality open model. For a civic application where operational cost matters, avoiding a paid API dependency on the critical path makes the project more sustainable.
 
 **Why not fine-tune an Urdu model?**
 
@@ -555,7 +597,7 @@ Simplicity and cost. The knowledge base is small and read-only at inference time
 
 **Roman Urdu retrieval gap**
 
-The embedding model (`all-MiniLM-L6-v2`) is trained primarily on English text. When a user asks a question in Roman Urdu, the query embedding may not match the English document chunks as accurately as an English query would. The LLM can still generate a Roman Urdu response, but retrieval precision is lower for Roman Urdu inputs than for English ones.
+The embedding model (`all-MiniLM-L6-v2`) is trained primarily on English text. When a user asks a question in Roman Urdu, the query embedding may not match the English document chunks as accurately as an English query would. The LLM can still generate a Roman Urdu response, but retrieval precision is lower for Roman Urdu inputs.
 
 **Knowledge base freshness**
 
@@ -569,9 +611,13 @@ The current knowledge base is primarily focused on Punjab and ICT (Islamabad). C
 
 Each query is processed independently. The chatbot does not remember previous turns in a conversation. If a user asks a follow-up question that depends on a previous answer, it will not be handled correctly.
 
+**Groq free tier limits**
+
+The Groq free tier allows 100,000 tokens per day on LLaMA 3.3 70B. For development and testing, switching to `llama-3.1-8b-instant` (1M tokens/day free) preserves the daily budget. The production backend uses 70B.
+
 **Railway free tier cold starts**
 
-The Railway free tier may spin down the backend after a period of inactivity. The first request after a cold start may take 10 to 15 seconds while the server loads the embedding model and ChromaDB into memory. Subsequent requests are fast.
+The Railway free tier may spin down the backend after a period of inactivity. The first request after a cold start may take 10 to 15 seconds while the server loads the embedding model and ChromaDB into memory.
 
 ---
 
@@ -579,8 +625,7 @@ The Railway free tier may spin down the backend after a period of inactivity. Th
 
 **Near term**
 
-- Driving license and motor vehicle registration services
-- Passport application process (DGIP)
+- Driving license and motor vehicle registration
 - Multilingual embeddings for improved Roman Urdu retrieval
 - Conversation memory for multi-turn queries
 
@@ -593,7 +638,7 @@ The Railway free tier may spin down the backend after a period of inactivity. Th
 **Long term**
 
 - User feedback loop to improve retrieval quality over time
-- BISP eligibility pre-screening form integrated into the frontend
+- BISP eligibility pre-screening form in the frontend
 - Voice input support for users with low literacy
 
 ---
@@ -606,8 +651,8 @@ To add a new knowledge base document:
 
 1. Create a well-structured plain-text file in the `data/` folder
 2. Source content only from official government websites
-3. Follow the existing document format (section headers, plain language, no jargon)
-4. Re-run the ingestion pipeline in the notebook (Steps 4 through 6)
+3. Follow the existing document format (section headers, plain language)
+4. Re-run the ingestion pipeline in the notebook (Steps 6 through 7)
 5. Export the new ChromaDB and replace the files in `backend/`
 6. Open a pull request with the new data file and updated ChromaDB files
 
