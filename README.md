@@ -1,8 +1,10 @@
 <div align="center">
-  
-![Awam-Asist-Citizen-Services-Navigation-RAG-Chatbot](frontend/logo.png)
 
-  <h1>Awam Assist</h1>
+ <h1>Awam Assist</h1>
+  
+![Awam-Asist-Citizen-Services-Navigation-RAG-Chatbot](frontend/logo)
+
+ 
 
   <p><strong>An AI-powered citizen service navigator for Pakistan.<br/>Plain answers. Real sources. English and Roman Urdu.</strong></p>
 
