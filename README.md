@@ -1,8 +1,9 @@
 <div align="center">
-
  <h1>Awam Assist</h1>
-  
-![Awam-Asist-Citizen-Services-Navigation-RAG-Chatbot](frontend/logo)
+
+
+ 
+<img src="frontend/logo" width="200"/>
 
  
 
