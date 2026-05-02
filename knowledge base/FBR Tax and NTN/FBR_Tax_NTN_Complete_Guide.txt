@@ -1,0 +1,163 @@
+FBR / TAX SERVICES - COMPLETE CITIZEN GUIDE
+===========================================
+Federal Board of Revenue (FBR) | Iris Portal
+Applicable: All Pakistani Citizens & Businesses | Updated: 2025
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 1: WHAT IS NTN?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NTN (National Tax Number) is your unique tax identity number issued
+by FBR. It is required for:
+- Filing income tax returns
+- Opening business bank accounts
+- Getting government contracts
+- Importing/exporting goods
+- Property purchase above Rs. 5 million
+- Vehicle registration (commercial)
+- Becoming an Active Taxpayer (Filer)
+
+For individual salaried persons: Your CNIC IS your NTN.
+For businesses / companies: A separate NTN is issued.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 2: NTN REGISTRATION (Individual / Salaried)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ONLINE (Recommended):
+1. Visit: iris.fbr.gov.pk
+2. Click "Registration for Unregistered Person"
+3. Enter your CNIC and mobile number
+4. OTP will be sent to your mobile
+5. Fill in your personal and income details
+6. Submit — NTN is usually your CNIC number confirmed
+
+DOCUMENTS NEEDED:
+- CNIC (original)
+- Mobile number registered on CNIC
+- Email address
+- Bank account number (IBAN)
+- Employer details (for salaried persons)
+
+IN-PERSON (RTO Office):
+- Visit nearest Regional Tax Office (RTO)
+- Fill NTN registration form
+- Submit with CNIC copy and employment letter
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 3: HOW TO CHECK FILER STATUS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FILER = Person who has filed their income tax return this year.
+FILER STATUS gives you lower withholding tax rates on:
+- Bank transactions
+- Property purchase/sale
+- Vehicle purchase
+- Prize bonds
+
+HOW TO CHECK:
+Method 1 — Website:
+  fbr.gov.pk → "Verify Taxpayer" → Enter CNIC
+
+Method 2 — SMS:
+  Type: ATL (space) CNIC-number
+  Send to: 9966
+  Example: ATL 3740512345678
+
+Method 3 — IRIS Portal:
+  iris.fbr.gov.pk → Login → Dashboard shows your status
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 4: HOW TO FILE INCOME TAX RETURN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WHO MUST FILE:
+- Annual income above Rs. 6,00,000 (6 Lakh)
+- Any person with NTN
+- Business owners / self-employed
+- Property owners
+- Freelancers earning abroad
+
+DEADLINE: Usually September 30 each year (extended sometimes)
+
+STEP-BY-STEP ONLINE FILING:
+1. Login to: iris.fbr.gov.pk
+2. Go to "Declaration" → "Income Tax Return"
+3. Select the tax year (July–June)
+4. Fill in:
+   - Salary/income details
+   - Bank accounts
+   - Property owned
+   - Investments
+   - Business income (if any)
+5. Review and submit
+6. Download your filed return acknowledgment (keep this)
+
+DOCUMENTS TO KEEP READY:
+- Salary slips / employer certificate (Form-16)
+- Bank statements
+- Rental income records
+- Any investment certificates
+- Utility bills for assets declared
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 5: BUSINESS / COMPANY NTN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DOCUMENTS FOR BUSINESS NTN:
+- CNIC of owner / all partners / directors
+- Business registration certificate (SECP or Partnership deed)
+- Utility bill for business address
+- Bank account details of business
+- Letterhead of company
+
+PROCESS:
+1. Visit iris.fbr.gov.pk → "Registration" → "Business"
+2. Upload all documents
+3. NTN issued within 3–5 working days
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 6: SALES TAX (STRN) REGISTRATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STRN (Sales Tax Registration Number) required if:
+- Annual business turnover exceeds Rs. 10 million
+- You supply taxable goods/services
+- You import goods
+
+Register via: iris.fbr.gov.pk → "Sales Tax Registration"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 7: FREELANCERS / IT EXPORTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Good news for freelancers: IT export income is EXEMPT from tax
+under current policy (verify current year's Finance Act).
+
+TO DECLARE FREELANCE INCOME:
+1. Register NTN on IRIS
+2. File annual return showing foreign remittance income
+3. Attach bank statement showing inward remittances
+4. Claim exemption under IT export category
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 8: PENALTIES FOR NOT FILING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Late filing penalty: Rs. 1,000 per day (minimum Rs. 10,000)
+- Non-filer: Higher withholding tax on banking, property, vehicles
+- Non-filer property purchase: 4% WHT (vs 2% for filers)
+- Non-filer vehicle: Higher registration tax
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 9: HELPLINE & CONTACT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FBR Helpline:    051-111-772-772 (111-FBR-FBR)
+IRIS Portal:     iris.fbr.gov.pk
+FBR Website:     fbr.gov.pk
+Email:           helpline@fbr.gov.pk
+Nearest RTO:     Search "FBR Regional Tax Office" + your city
+
+TIMINGS: Mon–Fri 8:00 AM – 8:00 PM
+         Sat: 9:00 AM – 5:00 PM (during filing season)

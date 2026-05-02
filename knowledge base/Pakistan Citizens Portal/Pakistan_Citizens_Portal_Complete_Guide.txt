@@ -1,0 +1,175 @@
+PAKISTAN CITIZENS PORTAL (PCP) - COMPLETE GUIDE
+================================================
+Prime Minister's Performance Delivery Unit (PMDU)
+File Complaints Against ANY Government Department | Updated: 2025
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 1: WHAT IS PAKISTAN CITIZENS PORTAL?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Pakistan Citizens Portal (PCP) is the official government app where
+you can file complaints against ANY government department or official.
+
+USE IT WHEN:
+- A government office is not helping you
+- An officer asked for bribe (corruption)
+- Your application is stuck for too long
+- You received wrong/unfair treatment from government
+- You want to report a public issue (bad road, broken pipe, etc.)
+- You need guidance on any government service
+
+IMPORTANT: PCP does not resolve issues itself — it forwards your
+complaint to the relevant department and tracks if they respond.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 2: HOW TO INSTALL & REGISTER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+INSTALL:
+- Android: Search "Pakistan Citizens Portal" on Google Play Store
+- iPhone: Search "Pakistan Citizens Portal" on App Store
+- Web: web.citizenportal.gov.pk
+
+REGISTRATION (One time only):
+1. Open the app
+2. Click "Register"
+3. Enter your CNIC number
+4. Enter your mobile number (must be on CNIC)
+5. OTP sent to your mobile — enter it
+6. Set password
+7. Registration complete
+
+NOTE: You can also register via web browser if you don't have
+      a smartphone.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 3: HOW TO FILE A COMPLAINT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP-BY-STEP:
+1. Login to PCP app
+2. Tap the "+" (plus) button to start new complaint
+3. Select complaint TYPE:
+   - Personal complaint (your own issue)
+   - Social complaint (public/community issue)
+   - Suggestion
+4. Select concerned DEPARTMENT from the list
+   (Example: NADRA, WASA, Police, Education Dept.)
+5. Select your PROVINCE and DISTRICT
+6. Write your complaint in the text box
+   - Be clear and specific
+   - Mention dates, officer names if known
+   - Include your CNIC / reference numbers
+7. Attach photos/documents if available
+8. Submit complaint
+
+COMPLAINT ID: After submission you get a unique Complaint ID.
+SAVE THIS — you need it to track your complaint.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 4: HOW TO WRITE AN EFFECTIVE COMPLAINT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BAD COMPLAINT (too vague):
+"NADRA is not helping me. Please resolve my issue."
+
+GOOD COMPLAINT (specific and clear):
+"I visited NADRA office Rawalpindi Saddar on 15 April 2025 for
+CNIC renewal. Officer Mr. [Name] at Window 3 refused to process
+my application without reason and asked me to come back next week.
+My token number was A-245. My CNIC is 37405-XXXXXXX-X.
+This is my 3rd visit and the issue is still unresolved."
+
+TIPS:
+✔ Mention date(s) of your visit/incident
+✔ Name the specific office and location
+✔ Include officer name or window number if known
+✔ Attach photo of any official receipt or document
+✔ State exactly what you want resolved
+✔ Keep it factual — no abusive language
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 5: TRACKING YOUR COMPLAINT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+IN THE APP:
+- Go to "My Complaints"
+- Select your complaint to see status
+
+STATUSES:
+- Pending      → Forwarded to department, awaiting their response
+- In Progress  → Department has accepted and is working on it
+- Resolved     → Department has marked it resolved
+- Dropped      → Complaint was not valid / not in their jurisdiction
+
+TIME LIMITS:
+- Departments are given a deadline to respond (usually 15–30 days)
+- If not resolved in time → escalates to higher authority automatically
+
+IF MARKED RESOLVED BUT NOT ACTUALLY RESOLVED:
+1. Rate the resolution as "Not Satisfied"
+2. Complaint re-opens and escalates
+3. DO NOT just close the app — your feedback matters
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 6: WHAT COMPLAINTS DOES PCP HANDLE?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PCP handles complaints for ALL government departments including:
+
+Federal:
+✔ NADRA (CNIC delays, errors)
+✔ FBR (tax issues)
+✔ Passport Office (delays)
+✔ PIA (flight issues)
+✔ Pakistan Railways
+✔ HEC (scholarship issues)
+✔ Ministry of Interior
+
+Provincial (Punjab, KP, Sindh, Balochistan):
+✔ Police (FIR, misbehaviour)
+✔ Education Department (school issues)
+✔ Health Department (hospital complaints)
+✔ WASA (water issues)
+✔ SNGPL (gas issues)
+✔ Revenue Department (land record issues)
+✔ Local Government (roads, sewerage)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 7: REPORTING CORRUPTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+If an officer asked for BRIBE (rishwat):
+
+Option 1 — PCP App:
+- File complaint → Select "Corruption / Bribery"
+- Name the officer, office, amount demanded, date
+
+Option 2 — NAB (National Accountability Bureau):
+- Online complaint: nab.gov.pk
+- Helpline: 1800-NAB-NAB (1800-622-622)
+
+Option 3 — ACE Punjab (Anti-Corruption Establishment):
+- Helpline: 0800-02345 (toll free)
+- Website: ace.punjab.gov.pk
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 8: FOR OVERSEAS PAKISTANIS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Overseas Pakistanis can also register and file complaints on PCP.
+Use your NICOP number instead of CNIC during registration.
+Web version available at: web.citizenportal.gov.pk (no app needed)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 9: HELPLINE & CONTACT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PCP Helpline:   051-9245590
+Website:        citizenportal.gov.pk
+Web App:        web.citizenportal.gov.pk
+PMDU:           pmdu.gov.pk
+
+App download:
+Android: play.google.com → search "Pakistan Citizens Portal"
+iPhone:  App Store → search "Pakistan Citizens Portal"
