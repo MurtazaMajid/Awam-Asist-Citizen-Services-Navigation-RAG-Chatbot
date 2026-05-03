@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img src="frontend/logo.png" width="200"/>
+<img src="frontend/logo" width="200"/>
 
 <h1>Awam Assist</h1>
 
