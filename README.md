@@ -2,11 +2,11 @@
 
 <div align="center">
 
-<img src="frontend/logo" width="200"/>
+<img src="frontend/logo.png" width="200"/>
 
 <h1>Awam Assist</h1>
 
-<p><strong>An AI-powered citizen service navigator for Pakistan.<br/>Plain answers. Real sources. English and Roman Urdu.</strong></p>
+<p><strong>An AI-powered citizen service navigator for Pakistan.<br/>Plain answers. Real sources. English and Roman Urdu. Voice input supported.</strong></p>
 
 <p>
   <a href="https://awamassist.vercel.app">
@@ -19,6 +19,7 @@
   <img src="https://img.shields.io/badge/LangChain-LCEL-3c7dbc?style=flat-square" alt="LangChain"/>
   <img src="https://img.shields.io/badge/LLM-LLaMA%203.3%2070B-orange?style=flat-square" alt="LLM"/>
   <img src="https://img.shields.io/badge/Vector%20DB-ChromaDB-red?style=flat-square" alt="ChromaDB"/>
+  <img src="https://img.shields.io/badge/STT-Groq%20Whisper-purple?style=flat-square" alt="Whisper"/>
   <img src="https://img.shields.io/badge/Deployed%20on-Railway-blueviolet?style=flat-square" alt="Railway"/>
 </p>
 
@@ -31,7 +32,9 @@
 - [The Problem](#the-problem)
 - [The Solution](#the-solution)
 - [Live Demo](#live-demo)
+- [App Preview](#app-preview)
 - [How It Works](#how-it-works)
+- [Voice Input Pipeline](#voice-input-pipeline)
 - [RAG Pipeline](#rag-pipeline)
 - [Knowledge Base](#knowledge-base)
 - [Tech Stack](#tech-stack)
@@ -67,11 +70,11 @@ This is an information access problem. And information access problems are exact
 
 ## The Solution
 
-Awam Assist is a RAG-based chatbot that acts as a single entry point for Pakistani government service information. A citizen types a question in plain English or Roman Urdu and receives a direct, accurate, plain-language answer sourced from official government documents.
+Awam Assist is a RAG-based chatbot that acts as a single entry point for Pakistani government service information. A citizen types or speaks a question in English or Roman Urdu and receives a direct, accurate, plain-language answer sourced from official government documents.
 
 It does not generate answers from the LLM's training data. It retrieves the most relevant chunks from a curated knowledge base of official Pakistani government sources, passes them to the LLM as context, and instructs the model to answer only from that context. This means the answers are grounded, verifiable, and traceable back to a real source.
 
-The chatbot currently covers 15 categories of government services and is deployed as a live REST API that any frontend or mobile application can connect to.
+The chatbot covers 15 categories of government services, supports bilingual text and voice input, and is deployed as a live REST API that any frontend or mobile application can connect to.
 
 ---
 
@@ -85,24 +88,79 @@ The chatbot currently covers 15 categories of government services and is deploye
 
 ---
 
+## App Preview
+
+![Awam Assist UI](frontend/Screenshot%202026-05-04%20020447.png)
+
+---
+
 ## How It Works
 
-When a user submits a question, the following sequence runs in under two seconds:
+When a user submits a question (typed or via voice), the following sequence runs in under two seconds:
 
-**Step 1 — Query Encoding**
+**Step 1 - Query Encoding**
 The user's question is converted into a 384-dimensional embedding vector using the `all-MiniLM-L6-v2` sentence transformer model running locally on the server.
 
-**Step 2 — Semantic Retrieval**
+**Step 2 - Semantic Retrieval**
 The query vector is compared against all stored document chunk vectors in ChromaDB using cosine similarity. The top 5 most semantically relevant chunks are retrieved. These chunks come from actual government documents, not from the LLM's weights.
 
-**Step 3 — Prompt Assembly**
+**Step 3 - Prompt Assembly**
 The 5 retrieved chunks are injected into a structured prompt alongside the original question. The prompt instructs the model to answer only from the provided context, to use plain language, and to respond in the same language the user wrote in.
 
-**Step 4 — Answer Generation**
+**Step 4 - Answer Generation**
 The assembled prompt is sent to Groq's inference API, which runs LLaMA 3.3 70B at extremely low latency. The model generates an answer grounded in the retrieved context.
 
-**Step 5 — Response**
+**Step 5 - Response**
 The answer is returned as a JSON response to the frontend. If the retrieved chunks do not contain enough information to answer the question, the model is instructed to say so rather than hallucinate.
+
+---
+
+## Voice Input Pipeline
+
+Awam Assist supports voice input in Urdu and Roman Urdu via Groq Whisper. This makes the app accessible to users who find typing difficult or prefer to speak naturally.
+
+```
+User taps mic button in browser
+          |
+          v
+  MediaRecorder API captures audio
+  Browser records as audio/webm
+          |
+          v
+  Audio blob sent via FormData
+  POST /transcribe endpoint
+          |
+          v
+  Groq Whisper (whisper-large-v3-turbo)
+  language = "ur"
+  prompt = domain keywords (sehat card, NADRA, CNIC, zakat...)
+          |
+          v
+  Transcript returned to frontend
+  Injected into input field
+  User reviews and sends
+          |
+          v
+  Normal RAG pipeline processes the transcript
+```
+
+**Why Groq Whisper?**
+
+The browser's built-in Web Speech API was tested first but proved unreliable for Pakistani accents and Roman Urdu vocabulary. It consistently misheard domain-specific terms like "sehat card" and "NADRA". Groq Whisper runs `whisper-large-v3-turbo` and handles multilingual speech including Pakistani-accented Urdu and Roman Urdu with high accuracy. It uses the same Groq API key already in use for the LLM, so there is no additional cost or separate account required.
+
+**Why the domain keyword prompt?**
+
+Whisper accepts an optional prompt parameter that biases transcription toward specific vocabulary. Providing government service terms like `sehat card, NADRA, CNIC, zakat, IESCO, passport, BISP, NTN` as the prompt significantly improves recognition accuracy for the exact terms citizens are most likely to use.
+
+**Three-state mic button:**
+
+| State | Appearance | Action |
+|-------|-----------|--------|
+| Idle | Gray mic icon | Tap to start recording |
+| Listening | Red mic icon | Tap to stop and transcribe |
+| Processing | Spinner | Whisper is transcribing, button disabled |
+
+The transcript is inserted into the input field without auto-sending, giving the user a chance to review and edit before submitting to the RAG chain.
 
 ---
 
@@ -118,7 +176,7 @@ Raw Source Documents
   Document Loading
   TextLoader for .txt files
   PyPDFLoader for .pdf files
-  os.walk — loads all subfolders recursively
+  os.walk loads all subfolders recursively
           |
           v
   Text Splitting
@@ -151,7 +209,7 @@ Raw Source Documents
 
 **Why chunk_size = 1000?**
 
-Smaller chunks improve retrieval precision but risk splitting a section header from the content that follows it. At 500 characters, section headers and their document lists were ending up in different chunks, causing retrieval failures for structured government documents. 1000 characters keeps a header and its associated content together in a single chunk, which significantly improved accuracy across all 15 categories.
+The initial implementation used chunk_size = 500. During evaluation, 3 out of 15 categories failed because structured government documents use section headers followed by detailed content. At 500 characters, the headers and their associated lists were ending up in different chunks, and retrieval would fetch the header chunk without the answer. Increasing to 1000 characters resolved all retrieval failures and brought batch evaluation to 15/15.
 
 **Why chunk_overlap = 100?**
 
@@ -201,12 +259,13 @@ All documents in the knowledge base were sourced from official Pakistani governm
 | Layer | Technology | Why |
 |-------|-----------|-----|
 | LLM | Groq, LLaMA 3.3 70B Versatile | Fast inference, free tier, high quality open model |
+| Speech to Text | Groq Whisper (whisper-large-v3-turbo) | Accurate for Pakistani accents and Roman Urdu, same API key as LLM |
 | Embeddings | HuggingFace all-MiniLM-L6-v2 | Lightweight, no API cost, strong English performance |
 | Vector Store | ChromaDB | Simple, persistent, no external service required |
 | RAG Orchestration | LangChain LCEL | Clean pipeline composition, well-maintained |
 | Backend API | FastAPI, Uvicorn | High performance Python API framework |
 | Backend Deployment | Railway | Simple Python deployment, auto-deploy on push |
-| Frontend | HTML, CSS, JavaScript | Lightweight, fast, no framework overhead |
+| Frontend | React, Vite, Tailwind CSS | Component-based, fast, deployed on Vercel |
 | Frontend Deployment | Vercel | Free, always-on static hosting |
 | Development Environment | Google Colab | Free CPU for ingestion pipeline |
 
@@ -219,14 +278,25 @@ All documents in the knowledge base were sourced from official Pakistani governm
                         |     End User     |
                         +--------+---------+
                                  |
-                    Types question in English
-                       or Roman Urdu
+                  Types OR speaks question
+                  English / Roman Urdu / Urdu
+                                 |
+                    +------------+------------+
+                    |                         |
+               Text input                Voice input
+                    |                         |
+                    |              MediaRecorder captures audio
+                    |              POST /transcribe
+                    |              Groq Whisper transcribes
+                    |              Transcript injected to input
+                    |                         |
+                    +------------+------------+
                                  |
                                  v
                   +--------------+--------------+
                   |         Frontend            |
                   |   awamassist.vercel.app     |
-                  |   HTML + CSS + JavaScript   |
+                  |   React + Vite + Tailwind   |
                   +--------------+--------------+
                                  |
                     HTTP POST /ask
@@ -249,7 +319,7 @@ All documents in the knowledge base were sourced from official Pakistani governm
           +-------+------+   +-------+------+
           |   ChromaDB   |   |  Groq API    |
           |  (local on   |   |  LLaMA 3.3   |
-          |   Railway)   |   |    70B       |
+          |   Railway)   |   |  70B+Whisper |
           +--------------+   +--------------+
 ```
 
@@ -261,20 +331,34 @@ All documents in the knowledge base were sourced from official Pakistani governm
 Awam-Asist-Citizen-Services-Navigation-RAG-Chatbot/
 |
 |-- backend/
-|   |-- main.py                          FastAPI application and RAG chain
+|   |-- main.py                          FastAPI app, RAG chain, Whisper endpoint
 |   |-- requirements.txt                 Python dependencies
 |   |-- railway.json                     Railway deployment configuration
 |   |-- chroma.sqlite3                   ChromaDB SQLite metadata store
 |   |-- data_level0.bin                  ChromaDB HNSW vector index
 |   |-- header.bin                       ChromaDB index header
 |   |-- length.bin                       ChromaDB index lengths
-|   └-- link_lists.bin                   ChromaDB HNSW link lists
+|   +-- link_lists.bin                   ChromaDB HNSW link lists
 |
 |-- frontend/
-|   |-- index.html                       Main chat interface
-|   |-- style.css                        Styling
-|   |-- script.js                        API call logic and UI interaction
-|   └-- logo.png                         Awam Assist logo
+|   |-- src/
+|   |   |-- components/
+|   |   |   |-- Header.tsx
+|   |   |   |-- CategoryTabs.tsx
+|   |   |   |-- Sidebar.tsx
+|   |   |   |-- ChatArea.tsx
+|   |   |   |-- MessageBubble.tsx
+|   |   |   |-- WelcomeCard.tsx
+|   |   |   |-- SuggestionChips.tsx
+|   |   |   +-- InputBar.tsx
+|   |   |-- constants/
+|   |   |   +-- services.js
+|   |   +-- hooks/
+|   |       |-- useChat.ts
+|   |       +-- useSpeechRecognition.ts
+|   |-- public/
+|   |   +-- awam-assist-logo.png
+|   +-- index.html
 |
 |-- data/
 |   |-- Zakat punjab complete.txt
@@ -291,12 +375,12 @@ Awam-Asist-Citizen-Services-Navigation-RAG-Chatbot/
 |   |-- Passport_Complete_Guide.txt
 |   |-- Property_Land_Records_Complete_Guide.txt
 |   |-- Sehat_Sahulat_Complete_Guide.txt
-|   └-- WASA_Gas_SNGPL_Complete_Guide.txt
+|   +-- WASA_Gas_SNGPL_Complete_Guide.txt
 |
 |-- notebook/
-|   └-- RAG_Pipeline_Awam_Assist.ipynb   Full pipeline: ingestion, embedding, testing
+|   +-- RAG_Pipeline_Awam_Assist.ipynb   Full pipeline: ingestion, embedding, testing
 |
-└-- README.md
++-- README.md
 ```
 
 ---
@@ -337,68 +421,46 @@ Response body:
 }
 ```
 
-**Example — English query:**
+### Transcribe Voice Input
+
+```
+POST /transcribe
+Content-Type: multipart/form-data
+```
+
+Request: `FormData` with field `audio` containing a `.webm` or `.wav` audio blob.
+
+Response body:
+```json
+{
+  "transcript": "string"
+}
+```
+
+Pass the returned transcript directly to `/ask` to complete the voice-to-answer pipeline.
+
+**Example - English query:**
 
 Request:
 ```json
-{
-  "question": "What documents do I need to register my marriage in Islamabad?"
-}
+{ "question": "What documents do I need to register my marriage in Islamabad?" }
 ```
 
 Response:
 ```json
-{
-  "answer": "To register your marriage at the Citizen Facilitation Center in G-11/4 Islamabad, you need: Original Nikkah Nama, an attested copy of the Nikkah Nama, copies of CNIC for both bride and groom, copies of CNIC for both fathers, a copy of passport if either party is a foreign national, and a B-Form copy if either party is under 18. The processing fee is Rs. 200 and processing takes 7 working days."
-}
+{ "answer": "To register your marriage at the Citizen Facilitation Center in G-11/4 Islamabad, you need: Original Nikkah Nama, an attested copy of the Nikkah Nama, copies of CNIC for both bride and groom, copies of CNIC for both fathers, a copy of passport if either party is a foreign national, and a B-Form copy if either party is under 18. The processing fee is Rs. 200 and processing takes 7 working days." }
 ```
 
-**Example — Roman Urdu query:**
+**Example - Roman Urdu query:**
 
 Request:
 ```json
-{
-  "question": "BISP k liye eligible hoon ya nahi kaise pata karein?"
-}
+{ "question": "BISP k liye eligible hoon ya nahi kaise pata karein?" }
 ```
 
 Response:
 ```json
-{
-  "answer": "BISP eligibility check karne k liye apna 13-digit CNIC number SMS karein 8171 pe. Jawab aayega ke aap eligible hain ya nahi. Ya phir 8171.bisp.gov.pk pe jaein aur CNIC enter karein. Eligibility k liye zaroori hai ke aapki household income poverty line se kam ho aur aap NSER survey mein registered hon."
-}
-```
-
-**Example — Legal query:**
-
-Request:
-```json
-{
-  "question": "Police refused to file my FIR. What are my legal options?"
-}
-```
-
-Response:
-```json
-{
-  "answer": "Police refusal to register an FIR for a cognizable offence is illegal under Section 154 CrPC. You have three options. First, submit a written complaint to the District Police Officer of your area. Second, file an application before the Sessions Court under Section 22-A and 22-B of the CrPC — the court can legally direct police to register your FIR. Third, call the Punjab Police complaint helpline on 1787. Do not delay as evidence weakens over time."
-}
-```
-
-**Example — Tax query:**
-
-Request:
-```json
-{
-  "question": "How do I register for NTN with FBR?"
-}
-```
-
-Response:
-```json
-{
-  "answer": "To register for NTN (National Tax Number) with FBR, go to the IRIS portal at iris.fbr.gov.pk and click on Registration for Unregistered Person. You will need your CNIC, a valid email address, and a phone number. After submitting, FBR will verify your details and issue your NTN. Salaried individuals can also register through their employer."
-}
+{ "answer": "BISP eligibility check karne k liye apna 13-digit CNIC number SMS karein 8171 pe. Jawab aayega ke aap eligible hain ya nahi." }
 ```
 
 ---
@@ -412,48 +474,21 @@ Response:
 
 ### Setup
 
-**1. Clone the repository**
-
 ```bash
 git clone https://github.com/MurtazaMajid/Awam-Asist-Citizen-Services-Navigation-RAG-Chatbot.git
 cd Awam-Asist-Citizen-Services-Navigation-RAG-Chatbot/backend
-```
 
-**2. Create a virtual environment**
-
-```bash
 python -m venv venv
-source venv/bin/activate        # On Windows: venv\Scripts\activate
-```
+source venv/bin/activate        # Windows: venv\Scripts\activate
 
-**3. Install dependencies**
-
-```bash
 pip install -r requirements.txt
-```
 
-**4. Set your Groq API key**
+export GROQ_API_KEY=your_groq_api_key_here   # Windows: set GROQ_API_KEY=...
 
-```bash
-export GROQ_API_KEY=your_groq_api_key_here
-```
-
-On Windows:
-```bash
-set GROQ_API_KEY=your_groq_api_key_here
-```
-
-**5. Start the API server**
-
-```bash
 uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-**6. Open the frontend**
-
-Open `frontend/index.html` in your browser and update the API base URL in `script.js` to `http://localhost:8000`.
-
-**7. Test the API directly**
+Test the text endpoint:
 
 ```bash
 curl -X POST http://localhost:8000/ask \
@@ -461,13 +496,26 @@ curl -X POST http://localhost:8000/ask \
   -d '{"question": "How do I get a new electricity connection from IESCO?"}'
 ```
 
+Test the voice endpoint:
+
+```bash
+curl -X POST http://localhost:8000/transcribe \
+  -F "audio=@your_audio_file.wav;type=audio/wav"
+```
+
+Run the frontend:
+
+```bash
+cd ../frontend
+npm install
+npm run dev
+```
+
 ---
 
 ## Rebuilding the Knowledge Base
 
-If you add new documents to the `data/` folder or update existing ones, you need to re-run the ingestion pipeline to regenerate the ChromaDB vector store.
-
-Open `notebook/RAG_Pipeline_Awam_Assist.ipynb` in Google Colab and run the following steps in order:
+Open `notebook/RAG_Pipeline_Awam_Assist.ipynb` in Google Colab and run the steps in order:
 
 | Step | What It Does |
 |------|-------------|
@@ -487,40 +535,15 @@ Open `notebook/RAG_Pipeline_Awam_Assist.ipynb` in Google Colab and run the follo
 | Step 14 | Interactive chat widget for manual testing |
 | Step 15 | Export ChromaDB as a zip file and download it |
 
-After downloading, extract the zip and replace the five ChromaDB files in the `backend/` folder:
+After downloading, replace the five ChromaDB files in `backend/` and push to GitHub. Railway auto-redeploys.
 
-```
-chroma.sqlite3
-data_level0.bin
-header.bin
-length.bin
-link_lists.bin
-```
-
-Push the updated files to GitHub. Railway will detect the push and automatically redeploy the backend with the new knowledge base.
-
-**Important:** Always run Step 6 (delete old ChromaDB) before Step 7 (build ChromaDB). Skipping this step causes a read-only database error because the previous session's ChromaDB is still locked.
+**Important:** Always run Step 6 before Step 7. Skipping it causes a read-only database error from the previous session's locked ChromaDB.
 
 ---
 
 ## Deployment Guide
 
 ### Backend on Railway
-
-The backend is a standard Python FastAPI application. Railway detects it automatically.
-
-**Required files in the backend folder:**
-
-```
-main.py
-requirements.txt
-railway.json
-chroma.sqlite3
-data_level0.bin
-header.bin
-length.bin
-link_lists.bin
-```
 
 **railway.json:**
 
@@ -535,33 +558,18 @@ link_lists.bin
 }
 ```
 
-**Environment variable to set on Railway:**
+**Environment variable:**
 
 | Variable | Value |
 |----------|-------|
-| `GROQ_API_KEY` | Your Groq API key |
-
-**Steps:**
-
-1. Push your code to GitHub
-2. Go to [railway.app](https://railway.app) and create a new project
-3. Select Deploy from GitHub repo and choose your repository
-4. Set the root directory to `backend/`
-5. Add the `GROQ_API_KEY` environment variable under the Variables tab
-6. Railway will build and deploy automatically
+| `GROQ_API_KEY` | Your Groq API key (used for both LLM and Whisper) |
 
 ### Frontend on Vercel
 
-The frontend is a static site (HTML + CSS + JS) with no build step required.
-
-**Steps:**
-
-1. Go to [vercel.com](https://vercel.com) and import your GitHub repository
-2. Set the root directory to `frontend/`
-3. Set framework preset to Other
+1. Import your GitHub repository at [vercel.com](https://vercel.com)
+2. Set root directory to `frontend/`
+3. Set framework preset to Vite
 4. Deploy
-
-Make sure the API base URL in `script.js` points to your Railway backend URL.
 
 ---
 
@@ -569,27 +577,27 @@ Make sure the API base URL in `script.js` points to your Railway backend URL.
 
 **Why RAG instead of fine-tuning?**
 
-Fine-tuning an LLM on government documents would be expensive, slow to update, and would still be prone to hallucination. RAG allows the knowledge base to be updated by simply adding a new text file and re-running the ingestion pipeline. The LLM is only used for reasoning and language generation, not as a knowledge store.
+Fine-tuning an LLM on government documents would be expensive, slow to update, and prone to hallucination. RAG allows the knowledge base to be updated by simply adding a text file and re-running the ingestion pipeline. The LLM is only used for reasoning and language generation, not as a knowledge store.
 
 **Why chunk_size = 1000 instead of a smaller value?**
 
-The initial implementation used chunk_size = 500. During evaluation, 3 out of 8 categories failed because structured government documents use section headers followed by detailed content. At 500 characters, the headers and their associated lists were splitting into separate chunks, and retrieval would fetch the header chunk without the answer. Increasing to 1000 characters keeps section headers and their content together, which resolved all retrieval failures.
+The initial implementation used chunk_size = 500. During evaluation, 3 out of 15 categories failed because section headers and their associated content split into separate chunks at that size. Increasing to 1000 resolved all retrieval failures and brought batch evaluation to 15/15.
+
+**Why Groq Whisper for voice instead of the Web Speech API?**
+
+The Web Speech API was tested first. It failed consistently for Pakistani accents and Roman Urdu, misreading "sehat card" as "shakti card" and similar errors. Groq Whisper handles multilingual speech and Pakistani-accented Urdu accurately, and uses the same API key already in use for the LLM with no additional cost.
 
 **Why ChromaDB instead of Pinecone or Weaviate?**
 
-ChromaDB runs locally with no external service dependency and no cost. For a knowledge base of 139 chunks, a fully managed vector database would be significant over-engineering. ChromaDB files are bundled directly with the backend and deployed to Railway as static files.
+ChromaDB runs locally with no external service dependency and no cost. For 139 chunks, a fully managed vector database would be over-engineering. ChromaDB files bundle directly with the backend.
 
 **Why Groq instead of OpenAI?**
 
-Groq's free tier provides fast inference on LLaMA 3.3 70B, which is a high-quality open model. For a civic application where operational cost matters, avoiding a paid API dependency on the critical path makes the project more sustainable.
+Groq's free tier provides fast inference on both LLaMA 3.3 70B and Whisper. For a civic application, avoiding paid API dependencies on the critical path makes the project more sustainable.
 
 **Why not fine-tune an Urdu model?**
 
-The target users type in Roman Urdu, not Urdu script. No production-ready embedding model exists specifically for Roman Urdu. The multilingual model `paraphrase-multilingual-MiniLM-L12-v2` is a planned upgrade that would improve retrieval for Roman Urdu queries. For now, the English embedding model handles retrieval while the LLM handles Roman Urdu response generation.
-
-**Why bundle ChromaDB with the backend instead of using a hosted vector DB?**
-
-Simplicity and cost. The knowledge base is small and read-only at inference time. Bundling the DB eliminates a network dependency, reduces latency, and keeps the project fully self-contained.
+The target users type and speak in Roman Urdu, not Urdu script. No production-ready embedding model exists specifically for Roman Urdu. The multilingual model `paraphrase-multilingual-MiniLM-L12-v2` is a planned upgrade. For now, the English embedding model handles retrieval while the LLM and Whisper handle Roman Urdu input and response generation.
 
 ---
 
@@ -597,27 +605,31 @@ Simplicity and cost. The knowledge base is small and read-only at inference time
 
 **Roman Urdu retrieval gap**
 
-The embedding model (`all-MiniLM-L6-v2`) is trained primarily on English text. When a user asks a question in Roman Urdu, the query embedding may not match the English document chunks as accurately as an English query would. The LLM can still generate a Roman Urdu response, but retrieval precision is lower for Roman Urdu inputs.
+The embedding model (`all-MiniLM-L6-v2`) is trained primarily on English text. Retrieval precision is lower for Roman Urdu inputs than for English ones, though the LLM still generates accurate Roman Urdu responses.
+
+**Voice input requires HTTPS**
+
+The `MediaRecorder` API requires a secure context. It works on the live Vercel deployment but not on plain `localhost`. Use `127.0.0.1` locally if you need to test voice input during development.
 
 **Knowledge base freshness**
 
-Government policies change. Fees, eligibility thresholds, and processes are updated periodically. The current knowledge base reflects information as of early 2026. There is no automated mechanism to detect when source documents change.
+Government policies change. The current knowledge base reflects information as of early 2026. There is no automated mechanism to detect when source documents change.
 
 **Geographic coverage**
 
-The current knowledge base is primarily focused on Punjab and ICT (Islamabad). Citizens from Sindh, KP, and Balochistan will find less relevant information for province-specific services.
+The knowledge base is primarily focused on Punjab and ICT (Islamabad). Citizens from Sindh, KP, and Balochistan will find less relevant information for province-specific services.
 
 **No conversation memory**
 
-Each query is processed independently. The chatbot does not remember previous turns in a conversation. If a user asks a follow-up question that depends on a previous answer, it will not be handled correctly.
+Each query is processed independently. The chatbot does not remember previous turns in a conversation.
 
 **Groq free tier limits**
 
-The Groq free tier allows 100,000 tokens per day on LLaMA 3.3 70B. For development and testing, switching to `llama-3.1-8b-instant` (1M tokens/day free) preserves the daily budget. The production backend uses 70B.
+The free tier allows 100,000 tokens per day on LLaMA 3.3 70B. For development, switching to `llama-3.1-8b-instant` (1M tokens/day free) preserves the daily budget.
 
 **Railway free tier cold starts**
 
-The Railway free tier may spin down the backend after a period of inactivity. The first request after a cold start may take 10 to 15 seconds while the server loads the embedding model and ChromaDB into memory.
+The Railway free tier may spin down the backend after inactivity. The first request after a cold start may take 10 to 15 seconds.
 
 ---
 
@@ -631,7 +643,7 @@ The Railway free tier may spin down the backend after a period of inactivity. Th
 
 **Medium term**
 
-- WhatsApp bot integration via Twilio for accessibility on mobile
+- WhatsApp bot integration via Twilio for mobile accessibility
 - Province-specific coverage for Sindh, KP, and Balochistan
 - Automated knowledge base refresh pipeline
 
@@ -639,13 +651,11 @@ The Railway free tier may spin down the backend after a period of inactivity. Th
 
 - User feedback loop to improve retrieval quality over time
 - BISP eligibility pre-screening form in the frontend
-- Voice input support for users with low literacy
+- Real-time bill and status lookup via official government APIs
 
 ---
 
 ## Contributing
-
-Contributions are welcome, especially for expanding the knowledge base to cover more services or additional provinces.
 
 To add a new knowledge base document:
 
